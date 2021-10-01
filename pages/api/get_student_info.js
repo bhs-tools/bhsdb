@@ -1,5 +1,22 @@
 const StudentVue = require("studentvue.js")
+import Cors from 'cors'
 
+// Initializing the cors middleware
+const cors = Cors({
+  methods: ['GET', 'HEAD'],
+})
+
+function runMiddleware(req, res, fn) {
+    return new Promise((resolve, reject) => {
+      fn(req, res, (result) => {
+        if (result instanceof Error) {
+          return reject(result)
+        }
+  
+        return resolve(result)
+      })
+    })
+  }
 function generateError(message,code) {
     return {
         "code": "ERROR",
@@ -16,7 +33,8 @@ function generateResp(message) {
     }
 }
 
-export default function validate(req, res) {
+export default async function get_student_info(req, res) {
+    await runMiddleware(req,res,cors)
     if (req.method != 'POST') {
         // cry
         res.status(405).json(generateError("Invalid Method","INVALID_METHOD"))
