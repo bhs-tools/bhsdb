@@ -14,12 +14,12 @@ export default class BHSDB extends React.Component {
             if (isValid) {
                 this.setState({loggedIn: true, username, password, page:"dashboard"})
             } else {
-                alert("Invalid username or password")
+                alert("Invalid username or password") // who uses alerts in 2021?
             }
         })
     }
     logout() {
-        this.setState({loggedIn: false, data:{}, page:""})
+        this.setState({loggedIn: false, username:"", password:"", page:""}) 
     }    
     render() {
         if (!this.state.loggedIn) {
