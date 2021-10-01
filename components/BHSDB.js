@@ -27,11 +27,10 @@ export default class BHSDB extends React.Component {
         } else {
             switch (this.state.page) {
                 case "dashboard":
-                    var page = <Dashboard username={this.state.username} password={this.state.password}/>
+                    var Thispage = Dashboard
                     break;
-                default:
-                    var page = <div> 404? </div>
             }
+            page = <Thispage username={this.state.username} password={this.state.password} /> // there is prob a better way to do this
             
         }
         return (
