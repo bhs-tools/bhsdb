@@ -1,38 +1,10 @@
 const StudentVue = require("studentvue.js")
 import Cors from 'cors'
-
+import { runMiddleware,  generateError, generateResp } from '../../lib/util'
 // Initializing the cors middleware
 const cors = Cors({
   methods: ['GET', 'HEAD'],
 })
-
-function runMiddleware(req, res, fn) {
-    return new Promise((resolve, reject) => {
-      fn(req, res, (result) => {
-        if (result instanceof Error) {
-          return reject(result)
-        }
-  
-        return resolve(result)
-      })
-    })
-  }
-
-function generateError(message,code) {
-    return {
-        "code": "ERROR",
-        "content": {
-            "code": code,
-            "error": message
-        }
-    }
-}
-function generateResp(message) {
-    return {
-        "code": "SUCCESS",
-        "content": message
-    }
-}
 
 export default async function get_schedule(req, res) {
     await runMiddleware(req,res,cors)

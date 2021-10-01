@@ -1,23 +1,39 @@
 import React from 'react';
 import Login from './pages/login'
+import Header from './Header'
+import Dashboard from './pages/dashboard'
+import { verify } from '../lib/clientvue';
 export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {loggedIn: false, data: {}, page:""};
+        this.state = {loggedIn: false, username:"",password:"", page:""};
       }
     login(username,password) {
         // do login things
-        this.setState({loggedIn: true})
+        verify(username,password).then((isValid) => {
+            if (isValid) {
+                this.setState({loggedIn: true, username, password, page:"dashboard"})
+            } else {
+                alert("Invalid username or password")
+            }
+        })
     }
     logout() {
         this.setState({loggedIn: false, data:{}, page:""})
     }    
     render() {
         if (!this.state.loggedIn) {
-            return <Login login={this.login.bind(this)} />
+            var page = <Login login={this.login.bind(this)}/>
+        } else {
+            var page = <Dashboard username={this.state.username} password={this.state.password}/>
         }
         return (
-            <div> Placeholder </div>
+            <div>
+                <Header loggedIn={this.state.loggedIn}/>
+                <div id="content" className="flex flex-col items-center justify-center min-h-screen py-2">
+                    { page }
+                </div>
+            </div>
         )
     }
 }
