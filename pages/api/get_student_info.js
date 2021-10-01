@@ -34,7 +34,7 @@ export default function validate(req, res) {
                 res.status(200).json(generateError(data.RT_ERROR.ERROR_MESSAGE,"STUDENTVUE_ERROR"))
                 return
             }
-            res.status(200).json(generateResp({}))
+            res.status(200).json(generateResp(data["StudentInfo"]))
             return
         });
 }

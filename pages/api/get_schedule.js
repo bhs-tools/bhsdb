@@ -27,14 +27,14 @@ export default function validate(req, res) {
         return;
     }
     StudentVue.login('https://wa-beth-psv.edupoint.com', req.body.username, req.body.password)
-        .then(client => client.getStudentInfo())
+        .then(client => client.getSchedule())
         .then((data) => {
             data = JSON.parse(data)
             if (data.hasOwnProperty("RT_ERROR")) {
                 res.status(200).json(generateError(data.RT_ERROR.ERROR_MESSAGE,"STUDENTVUE_ERROR"))
                 return
             }
-            res.status(200).json(generateResp({}))
+            res.status(200).json(generateResp(data["StudentClassSchedule"]))
             return
         });
 }
