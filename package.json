@@ -1,20 +1,21 @@
 {
-  "name": "bhsdb",
-  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
-    "serve": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "vue": "^3.2.6"
+    "cors": "^2.8.5",
+    "next": "latest",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "studentvue.js": "^0.1.1",
+    "swr": "^1.0.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.6.0",
-    "@vue/compiler-sfc": "^3.2.6",
-    "autoprefixer": "^10.3.3",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.9",
-    "vite": "^2.5.2"
+    "autoprefixer": "^10.2.6",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.4"
   }
 }
