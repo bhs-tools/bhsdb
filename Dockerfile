@@ -1,7 +1,9 @@
 FROM node:14
 WORKDIR /usr/src/app
 COPY package*.json ./
-RUN npm install
+COPY yarn.lock ./
+RUN npm install -g yarn
+RUN yarn
 COPY . .
-RUN npm run build
-ENTRYPOINT [ "npm","run","start" ]
+RUN yarn build
+ENTRYPOINT [ "yarn","start" ]
