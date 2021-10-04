@@ -4,9 +4,10 @@ import Header from './Header'
 import Dashboard from './pages/dashboard'
 import { verify } from '../lib/clientvue';
 export default class BHSDB extends React.Component {
+    static UserContext = React.createContext({})
     constructor(props) {
         super(props);
-        this.state = {loggedIn: false, username:"",password:"", page:""};
+        this.state = {loggedIn: false, username:"",password:"", data:{}, page:""};
       }
     login(username,password) {
         // do login things
@@ -19,8 +20,20 @@ export default class BHSDB extends React.Component {
         })
     }
     logout() {
-        this.setState({loggedIn: false, username:"", password:"", page:""}) 
-    }    
+        this.setState({loggedIn: false, username:"", password:"", content: {}, page:""}) 
+    }
+    get_content() {
+       this.setState({
+           content: {
+               get_student_info: {
+                   loading: true,
+                   error: false,
+                   data: {}
+               }
+           }
+       })
+       // fetch all studentvue content here
+    }
     render() {
         if (!this.state.loggedIn) {
             var page = <Login login={this.login.bind(this)}/>
@@ -35,9 +48,11 @@ export default class BHSDB extends React.Component {
         return (
             <div>
                 <Header loggedIn={this.state.loggedIn}/>
+                <UserContext.Provider value={this.state.content}>
                 <div id="content" className="flex flex-col items-center justify-center min-h-screen py-2">
                     { page }
                 </div>
+                </UserContext.Provider>
             </div>
         )
     }
