@@ -2,18 +2,19 @@ import React from 'react';
 import Login from './pages/login'
 import Header from './Header'
 import Dashboard from './pages/dashboard'
-import { verify } from '../lib/clientvue';
+import { verify, api_grabber } from '../lib/clientvue';
 import { UserContext } from '../lib/contexts';
+
 export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {loggedIn: false, username:"",password:"", data:{}, page:""};
+        this.state = {loggedIn: false, username:"",password:"", content:{get_student_info: {loading: true,error: false,data: {}}}, page:""};
       }
     login(username,password) {
         // do login things
         verify(username,password).then((isValid) => {
             if (isValid) {
-                this.setState({loggedIn: true, username, password, page:"dashboard"})
+                this.setState({loggedIn: true, username, password, page:"dashboard"},this.get_content.bind(this))
             } else {
                 alert("Invalid username or password") // who uses alerts in 2021?
             }
@@ -33,6 +34,10 @@ export default class BHSDB extends React.Component {
            }
        })
        // fetch all studentvue content here
+       console.log("in gamer get_content")
+       api_grabber("get_student_info",this.state.username,this.state.password).then((js) => {
+        this.setState({content:{get_student_info:{loading:false,error:false,data:js}}})
+       })
     }
     render() {
         if (!this.state.loggedIn) {
@@ -40,7 +45,7 @@ export default class BHSDB extends React.Component {
         } else {
             switch (this.state.page) {
                 case "dashboard":
-                    var Thispage = <Dashboard />
+                    var page = <Dashboard />
                     break;
             }
             
