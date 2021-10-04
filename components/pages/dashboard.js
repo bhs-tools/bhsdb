@@ -1,6 +1,7 @@
 import React from 'react';
 import StudentName from '../helpers/studentName';
 import Period from '../helpers/Period'
+import Spinner from '../spinner'
 export default class Dashboard extends React.Component {
     
     render() {
@@ -15,6 +16,7 @@ export default class Dashboard extends React.Component {
                     <li>4. <Period period={4}/></li>
                     <li>5. <Period period={5}/></li>
                 </ol>
+                <p> spinners! <Spinner /> <Spinner /> <Spinner /> spin! </p>
             </div>
         )
     }
