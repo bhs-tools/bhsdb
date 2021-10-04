@@ -16,10 +16,10 @@ export default class Login extends React.Component {
     render() {
         return (
             <div>
-                <h1 className="font-bold text-center">Login</h1>
-                <input className="border w-full" id="username" autoComplete="off" placeholder="Username" value={this.state.username} onChange={this.handleUsernameChange.bind(this)}></input><br />
-                <input className="border w-full" type="password" id="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)}></input><br />
-                <button className="border-2 text-center" onClick={this.handleLogin.bind(this)}> Login </button> 
+                <h1 className="font-bold text-center m-1">Login</h1>
+                <input className="border w-full m-1" id="username" autoComplete="off" placeholder="Username" value={this.state.username} onChange={this.handleUsernameChange.bind(this)}></input><br />
+                <input className="border w-full m-1" type="password" id="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)}></input><br />
+                <button className="w-full border-2 m-1 text-center" onClick={this.handleLogin.bind(this)}> Login </button> 
             </div>
         )
     }
