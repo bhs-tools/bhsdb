@@ -1,8 +1,11 @@
 import React from 'react';
-import TestStudentInfo from '../test-student-info';
-
+import StudentName from '../helpers/studentName';
 export default class Dashboard extends React.Component {
     render() {
-        return <TestStudentInfo username={this.props.username} password={this.props.password}/>
+        return (
+            <div>
+                Hello <StudentName />!
+            </div>
+        )
     }
 }
