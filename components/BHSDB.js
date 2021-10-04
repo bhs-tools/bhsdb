@@ -3,7 +3,7 @@ import Login from './pages/login'
 import Header from './Header'
 import Dashboard from './pages/dashboard'
 import { verify } from '../lib/clientvue';
-export const UserContext = React.createContext({})
+import { UserContext } from '../lib/contexts';
 export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
