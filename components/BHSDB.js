@@ -4,6 +4,8 @@ import Header from './Header'
 import Dashboard from './pages/dashboard'
 import { verify, api_grabber } from '../lib/clientvue';
 import { UserContext } from '../lib/contexts';
+import { Box } from '@mui/system';
+
 const loading = {loading: true,error: false,data: {}}
 export default class BHSDB extends React.Component {
     constructor(props) {
@@ -63,9 +65,9 @@ export default class BHSDB extends React.Component {
             <div>
                 <Header loggedIn={this.state.loggedIn}/>
                 <UserContext.Provider value={this.state.content}>
-                <div id="content" className="flex flex-col items-center justify-center min-h-screen py-2">
+                <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                     { page }
-                </div>
+                </Box>
                 </UserContext.Provider>
             </div>
         )

@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react';
+import LoopIcon from '@mui/icons-material/Loop';
 export default function Spinner() {
-    return <span className="animate animate-spin w-1"><Icon icon="ei:spinner-3" inline={true} /></span>
+    return <LoopIcon className="spin" />;
 }

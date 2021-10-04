@@ -6,6 +6,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@fontsource/roboto": "^4.5.1",
+    "@mui/icons-material": "^5.0.1",
+    "@mui/material": "^5.0.2",
     "cors": "^2.8.5",
     "next": "latest",
     "react": "^17.0.2",
@@ -14,9 +19,7 @@
     "swr": "^1.0.1"
   },
   "devDependencies": {
-    "@iconify/react": "^3.0.1",
     "autoprefixer": "^10.2.6",
-    "postcss": "^8.3.5",
-    "tailwindcss": "^2.2.4"
+    "postcss": "^8.3.5"
   }
 }

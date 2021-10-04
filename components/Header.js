@@ -1,11 +1,16 @@
 import React from 'react';
+import { AppBar, Toolbar, IconButton, MenuIcon, Typography } from '@mui/material';
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
       }
     render() {
         return (
-            <nav className="flex text-white justify-between flex-wrap bg-gray-800 p-6 fixed w-full z-10 top-0"> BHSDB </nav>
+            <AppBar position="static">
+                <Toolbar variant="dense"><Typography variant="h6" color="inherit" component="div">
+                BHSDB
+                </Typography></Toolbar>
+            </AppBar>
         )
     }
 }
