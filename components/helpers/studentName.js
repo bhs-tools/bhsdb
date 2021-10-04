@@ -7,7 +7,7 @@ export default class StudentName extends React.Component {
     render() {
     console.log("render!")
     console.log(this.context)
-    var { student_info, isLoading, isError } = get_student_info(this.context) // todo: pull context from this and not parent
+    var { student_info, isLoading, isError } = get_student_info(this.context)
     if (isLoading) return <Spinner />
     if (isError) return <div>Error!</div>
     return (
