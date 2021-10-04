@@ -4,11 +4,11 @@ import Header from './Header'
 import Dashboard from './pages/dashboard'
 import { verify, api_grabber } from '../lib/clientvue';
 import { UserContext } from '../lib/contexts';
-
+const loading = {loading: true,error: false,data: {}}
 export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {loggedIn: false, username:"",password:"", content:{get_student_info: {loading: true,error: false,data: {}}}, page:""};
+        this.state = {loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading}, page:""};
       }
     login(username,password) {
         // do login things
@@ -26,18 +26,27 @@ export default class BHSDB extends React.Component {
     get_content() {
        this.setState({
            content: {
-               get_student_info: {
-                   loading: true,
-                   error: false,
-                   data: {}
-               }
+               get_student_info: loading,
+               get_schedule: loading
            }
        })
        // fetch all studentvue content here
        console.log("in gamer get_content")
        api_grabber("get_student_info",this.state.username,this.state.password).then((js) => {
-        this.setState({content:{get_student_info:{loading:false,error:false,data:js}}})
-       })
+        this.update_content("get_student_info",js)
+        })
+        api_grabber("get_schedule",this.state.username,this.state.password).then((js) => {
+            this.update_content("get_schedule",js)
+        })
+    }
+    update_content(contenttype,content) {
+        var oldobj = this.state.content
+        oldobj[contenttype] = {
+            loading: false,
+            error: false,
+            data: content
+        }
+        this.setState({content:oldobj}) // todo: this is prob a bad idea
     }
     render() {
         if (!this.state.loggedIn) {
