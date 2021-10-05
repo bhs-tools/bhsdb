@@ -26,14 +26,14 @@ export default class BHSDB extends React.Component {
         this.setState({loggedIn: false, username:"", password:"", content: {}, page:""}) 
     }
     get_content() {
-       this.setState({
+       /*this.setState({
            content: {
                get_student_info: loading,
                get_schedule: loading,
                get_gradebook: loading,
                get_school_info: loading
            }
-       })
+       })*/
        // fetch all studentvue content here
        console.log("in gamer get_content")
        api_grabber("get_student_info",this.state.username,this.state.password).then((js) => {
