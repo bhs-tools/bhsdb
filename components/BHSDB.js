@@ -4,7 +4,7 @@ import Header from './Header'
 import Dashboard from './pages/dashboard'
 import { verify, api_grabber } from '../lib/clientvue';
 import { UserContext } from '../lib/contexts';
-import { Box } from '@mui/system';
+import { Box } from '@mui/material';
 import PageNav from './pagenav';
 import NotFound from './pages/notfound';
 const loading = {loading: true,error: false,data: {}}
