@@ -16,13 +16,13 @@ export default class Period extends React.Component {
     } else {
         var period = this.props.period
     }
-    console.log("in render for Period()")
+    /*console.log("in render for Period()")
     console.log(schedule)
-    console.log(gradebook)
+    console.log(gradebook)*/
     var perioddata = schedule.ClassLists.ClassListing[period-1]
     var gradedata = gradebook.Courses.Course[period-1]
     return (
-        <span>{ perioddata.CourseTitle } in room { perioddata.RoomName } with grade { gradedata.Marks.Mark.CalculatedScoreString } ({ gradedata.Marks.Mark.CalculatedScoreRaw }%)</span>
+        <span>{ perioddata.CourseTitle } in room { perioddata.RoomName }</span>
     )
     }
 }

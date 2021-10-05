@@ -6,6 +6,7 @@ import { verify, api_grabber } from '../lib/clientvue';
 import { UserContext } from '../lib/contexts';
 import { Box } from '@mui/system';
 import PageNav from './pagenav';
+import NotFound from './pages/notfound';
 const loading = {loading: true,error: false,data: {}}
 export default class BHSDB extends React.Component {
     constructor(props) {
@@ -73,17 +74,22 @@ export default class BHSDB extends React.Component {
                 case "dashboard":
                     var page = <Dashboard />
                     break;
+                default:
+                    var page = <NotFound />
             }
             
         }
         return (
             <UserContext.Provider value={this.state.content}>
-                <Header loggedIn={this.state.loggedIn}/>
-                <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-                    { page }
-                </Box>
-                <PageNav loggedIn={this.state.loggedIn} selected={this.state.page} setpage={this.setpage.bind(this)}/>    
+                <div style={{"minHeight": "100vh"}}>
+                    <Header loggedIn={this.state.loggedIn}/>
+                    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                        { page }     
+                    </Box>
+                    <PageNav loggedIn={this.state.loggedIn} selected={this.state.page} setpage={this.setpage.bind(this)}/> 
+                </div>
             </UserContext.Provider>
+            
         )
     }
 }
