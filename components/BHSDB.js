@@ -51,9 +51,13 @@ export default class BHSDB extends React.Component {
     }
     update_content(contenttype,content) {
         var oldobj = this.state.content
+        var err = false
+        if (content.code == "ERROR") {
+            err = true
+        }
         oldobj[contenttype] = {
             loading: false,
-            error: false,
+            error: err,
             data: content
         }
         this.setState({content:oldobj}) // todo: this is prob a bad idea
