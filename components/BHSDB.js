@@ -10,7 +10,7 @@ const loading = {loading: true,error: false,data: {}}
 export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading, get_gradebook:loading,get_school_info:loading}, page:""};
+        this.state = {loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading, get_gradebook:loading,get_school_info:loading, refresh: this.get_content.bind(this)}, page:""};
       }
     login(username,password) {
         // do login things
