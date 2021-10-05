@@ -1,0 +1,22 @@
+
+vscode:
+  extensions:
+    - vscode-icons-team.vscode-icons
+    - mgmcdermott.vscode-language-babel
+# Commands to start on workspace startup
+tasks:
+  - init: yarn
+    command: yarn dev
+# Ports to expose on workspace startup
+ports:
+  - port: 3000
+    onOpen: open-preview
+github:
+  prebuilds:
+    master: true
+    branches: false
+    pullRequests: true
+    pullRequestsFromForks: false
+    addCheck: true
+    addComment: false
+    addBadge: true
