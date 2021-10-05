@@ -10,7 +10,7 @@ const loading = {loading: true,error: false,data: {}}
 export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading}, page:""};
+        this.state = {loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading, get_gradebook:loading}, page:""};
       }
     login(username,password) {
         // do login things
@@ -29,7 +29,8 @@ export default class BHSDB extends React.Component {
        this.setState({
            content: {
                get_student_info: loading,
-               get_schedule: loading
+               get_schedule: loading,
+               get_gradebook: loading
            }
        })
        // fetch all studentvue content here
@@ -39,6 +40,9 @@ export default class BHSDB extends React.Component {
         })
         api_grabber("get_schedule",this.state.username,this.state.password).then((js) => {
             this.update_content("get_schedule",js)
+        })
+        api_grabber("get_gradebook",this.state.username,this.state.password).then((js) => {
+            this.update_content("get_gradebook",js)
         })
     }
     update_content(contenttype,content) {
