@@ -3,6 +3,7 @@ import StudentName from '../helpers/studentName';
 import Period from '../helpers/Period'
 import Spinner from '../spinner'
 import { Typography } from '@mui/material';
+import Schoolname from '../helpers/schoolname';
 export default class Dashboard extends React.Component {
     
     render() {
@@ -18,6 +19,7 @@ export default class Dashboard extends React.Component {
                     <li><Period period={5}/></li>
                 </ol>
                 <p> spinners! <Spinner /> <Spinner /> <Spinner /> spin! </p>
+                <p>You go to <Schoolname />!</p>
             </Typography>
         )
     }
