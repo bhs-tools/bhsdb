@@ -58,7 +58,7 @@ export default class BHSDB extends React.Component {
         oldobj[contenttype] = {
             loading: false,
             error: err,
-            data: content
+            data: content.content
         }
         this.setState({content:oldobj}) // todo: this is prob a bad idea
     }

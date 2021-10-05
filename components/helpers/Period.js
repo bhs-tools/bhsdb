@@ -13,7 +13,7 @@ export default class Period extends React.Component {
     } else {
         var period = this.props.period
     }
-    var perioddata = schedule.content.ClassLists.ClassListing[period-1]
+    var perioddata = schedule.ClassLists.ClassListing[period-1]
     return (
         <span>{ perioddata.CourseTitle } in room { perioddata.RoomName }</span>
     )

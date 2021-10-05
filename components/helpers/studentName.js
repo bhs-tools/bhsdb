@@ -11,7 +11,7 @@ export default class StudentName extends React.Component {
     if (isLoading) return <Spinner />
     if (isError) return <div>Error!</div>
     return (
-        <span>{ student_info.content.FormattedName }</span>
+        <span>{ student_info.FormattedName }</span>
     )
     }
 }
