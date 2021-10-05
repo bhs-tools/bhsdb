@@ -6,11 +6,14 @@ export default class Header extends React.Component {
       }
     render() {
         return (
+            <React.Fragment>
             <AppBar position="static">
                 <Toolbar variant="dense"><Typography variant="h6" color="inherit" component="div">
                 BHSDB
                 </Typography></Toolbar>
             </AppBar>
+            </React.Fragment>
+
         )
     }
 }

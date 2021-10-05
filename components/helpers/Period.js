@@ -6,7 +6,9 @@ export default class Period extends React.Component {
     static contextType = UserContext;
     render() {
     var { schedule, isLoading, isError } = get_schedule(this.context)
-    var { gradebook, isLoadingg, isErrorg } = get_gradebook(this.context)
+    var isLoadingg = isLoading
+    var isErrorg = isError //TODO: make this not garbage, maybe a get_multiple func which takes in get_schedule and get_gradebook and does this automatically?
+    var { gradebook, isLoading, isError } = get_gradebook(this.context)
     if (isLoading || isLoadingg) return <Spinner />
     if (isError || isErrorg) return <div>Error!</div>
     if (this.props.period === undefined) {
@@ -14,6 +16,9 @@ export default class Period extends React.Component {
     } else {
         var period = this.props.period
     }
+    console.log("in render for Period()")
+    console.log(schedule)
+    console.log(gradebook)
     var perioddata = schedule.ClassLists.ClassListing[period-1]
     var gradedata = gradebook.Courses.Course[period-1]
     return (

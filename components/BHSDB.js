@@ -5,7 +5,7 @@ import Dashboard from './pages/dashboard'
 import { verify, api_grabber } from '../lib/clientvue';
 import { UserContext } from '../lib/contexts';
 import { Box } from '@mui/system';
-
+import PageNav from './pagenav';
 const loading = {loading: true,error: false,data: {}}
 export default class BHSDB extends React.Component {
     constructor(props) {
@@ -62,6 +62,9 @@ export default class BHSDB extends React.Component {
         }
         this.setState({content:oldobj}) // todo: this is prob a bad idea
     }
+    setpage(newpage) {
+        this.setState({page:newpage})
+    }
     render() {
         if (!this.state.loggedIn) {
             var page = <Login login={this.login.bind(this)}/>
@@ -74,14 +77,13 @@ export default class BHSDB extends React.Component {
             
         }
         return (
-            <div>
+            <UserContext.Provider value={this.state.content}>
                 <Header loggedIn={this.state.loggedIn}/>
-                <UserContext.Provider value={this.state.content}>
                 <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                     { page }
                 </Box>
-                </UserContext.Provider>
-            </div>
+                <PageNav loggedIn={this.state.loggedIn} selected={this.state.page} setpage={this.setpage.bind(this)}/>    
+            </UserContext.Provider>
         )
     }
 }
