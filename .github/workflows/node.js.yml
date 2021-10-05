@@ -38,6 +38,10 @@ jobs:
       with:
         path: ${{ github.workspace }}/node_modules
         key: ${{ runner.os }}-nodejs-${{ hashFiles('**/yarn.lock') }}
+    - uses: actions/cache@v2
+      with:
+        path: ${{ github.workspace }}/.yarn/cache
+        key: ${{ runner.os }}-yarncache-${{ hashFiles('**/yarn.lock') }}
     - run: npm install -g yarn
     - run: yarn install
     - run: yarn build
