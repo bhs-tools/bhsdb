@@ -71,6 +71,16 @@ export default class BHSDB extends React.Component {
     setSettings(x) {
         this.setState({settings: x})
     }
+    componentDidMount() {
+        this.refreshtimer = setInterval(() => {
+            if (this.state.loggedIn) {
+                this.get_content()
+            }
+        },5*60*1000) // 5 minutes
+    }
+    componentWillUnmount() {
+        clearInterval(this.refreshtimer)
+    }
     render() {
         if (!this.state.loggedIn) {
             var page = <Login login={this.login.bind(this)}/>
