@@ -2719,6 +2719,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"js-cookie@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "js-cookie@npm:3.0.1"
+  checksum: bb48de67e2a6bd1ae3dfd6b2d5a167c33dd0c5a37e909206161eb0358c98f17cb55acd55827a58e9eea3630d89444e7479f7938ef4420dda443218b8c434a4c3
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -3961,6 +3968,7 @@ resolve@^1.12.0:
     "@mui/material": ^5.0.2
     autoprefixer: ^10.2.6
     cors: ^2.8.5
+    js-cookie: ^3.0.1
     next: latest
     postcss: ^8.3.5
     react: ^17.0.2

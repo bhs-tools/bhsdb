@@ -2,6 +2,7 @@ import React from 'react';
 import Login from './pages/login'
 import Header from './Header'
 import Dashboard from './pages/dashboard'
+import Cookies from 'js-cookie';
 import { verify, api_grabber } from '../lib/clientvue';
 import { UserContext } from '../lib/contexts';
 import { Box } from '@mui/material';
@@ -13,13 +14,22 @@ const defaultsettings = {testsetting: false, testsetting2: true}
 export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
+        Cookies.set("bhsdb","1")
+        var username = Cookies.get("username")
+        var password = Cookies.get("password")
+        if (username != undefined && password != undefined) {
+            this.login(username,password)
+        }
         this.state = {settings:defaultsettings, loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading, get_gradebook:loading,get_school_info:loading, refresh: this.get_content.bind(this)}, page:""};
       }
     login(username,password) {
         // do login things
+        // todo: add a spinner overlay while we login
         verify(username,password).then((isValid) => {
             if (isValid) {
                 this.setState({loggedIn: true, username, password, page:"dashboard"},this.get_content.bind(this))
+                Cookies.set("username",username, { expires: 7 })
+                Cookies.set("password", password, { expires: 7 })
             } else {
                 alert("Invalid username or password") // who uses alerts in 2021?
             }
@@ -27,6 +37,8 @@ export default class BHSDB extends React.Component {
     }
     logout() {
         this.setState({loggedIn: false, username:"", password:"", content: {}, page:""}) 
+        Cookies.delete("username")
+        Cookies.delete("password")
     }
     get_content() {
        /*this.setState({
