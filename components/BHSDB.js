@@ -5,7 +5,7 @@ import Dashboard from './pages/dashboard'
 import Cookies from 'js-cookie';
 import { verify, api_grabber } from '../lib/clientvue';
 import { UserContext } from '../lib/contexts';
-import { Box } from '@mui/material';
+import { Box, CircularProgress, Backdrop } from '@mui/material';
 import PageNav from './pagenav';
 import NotFound from './pages/notfound';
 import SettingsPage from './pages/settings';
@@ -17,14 +17,14 @@ export default class BHSDB extends React.Component {
         Cookies.set("bhsdb","1")
         var username = Cookies.get("username")
         var password = Cookies.get("password")
+        this.state = {settings:defaultsettings, loggingIn: false, loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading, get_gradebook:loading,get_school_info:loading, refresh: this.get_content.bind(this)}, page:""};
         if (username != undefined && password != undefined) {
             this.login(username,password)
         }
-        this.state = {settings:defaultsettings, loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading, get_gradebook:loading,get_school_info:loading, refresh: this.get_content.bind(this)}, page:""};
       }
     login(username,password) {
         // do login things
-        // todo: add a spinner overlay while we login
+        this.setState({"loggingIn": true})
         verify(username,password).then((isValid) => {
             if (isValid) {
                 this.setState({loggedIn: true, username, password, page:"dashboard"},this.get_content.bind(this))
@@ -33,6 +33,7 @@ export default class BHSDB extends React.Component {
             } else {
                 alert("Invalid username or password") // who uses alerts in 2021?
             }
+            this.setState({loggingIn: false})
         })
     }
     logout() {
@@ -117,6 +118,9 @@ export default class BHSDB extends React.Component {
                 <div style={{"minHeight": "100vh"}}>
                     <Header loggedIn={this.state.loggedIn}/>
                     <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={this.state.loggingIn}>
+                            <CircularProgress color="inherit" />
+                        </Backdrop>
                         { page }     
                     </Box>
                     <PageNav loggedIn={this.state.loggedIn} selected={this.state.page} setpage={this.setpage.bind(this)}/> 
