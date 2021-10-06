@@ -17,6 +17,7 @@ export default class Dashboard extends React.Component {
                     <li><Period period={3}/></li>
                     <li><Period period={4}/></li>
                     <li><Period period={5}/></li>
+                    <li><Period period={6}/></li>
                 </ol>
                 <p> spinners! <Spinner /> <Spinner /> <Spinner /> spin! </p>
                 <p>You go to <Schoolname />!</p>
