@@ -2,7 +2,7 @@ import React from 'react';
 import Login from './pages/login'
 import Header from './Header'
 import Dashboard from './pages/dashboard'
-import Cookies from 'js-cookie';
+import CookiesRaw from 'js-cookie';
 import { verify, api_grabber } from '../lib/clientvue';
 import { UserContext } from '../lib/contexts';
 import { Box, CircularProgress, Backdrop } from '@mui/material';
@@ -11,6 +11,7 @@ import NotFound from './pages/notfound';
 import SettingsPage from './pages/settings';
 const loading = {loading: true,error: false,data: {}}
 const defaultsettings = {testsetting: false, testsetting2: true}
+const Cookies = CookiesRaw.withAttributes({ secure: true, expires: 7 })
 export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
@@ -83,6 +84,7 @@ export default class BHSDB extends React.Component {
     }
     setSettings(x) {
         this.setState({settings: x})
+        Cookies.set("settings",JSON.stringify(x))
     }
     componentDidMount() {
         console.log("Setup refresh")
@@ -92,6 +94,10 @@ export default class BHSDB extends React.Component {
                 this.get_content()
             }
         },1*60*1000) // 5 minutes
+        if (Cookies.get("settings") != undefined) {
+            console.log("loading settings")
+            this.setSettings(JSON.parse(Cookies.get("settings")))
+        }
     }
     componentWillUnmount() {
         console.log("Stopping refresh")
