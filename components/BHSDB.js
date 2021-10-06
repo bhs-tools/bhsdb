@@ -16,31 +16,29 @@ export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
         Cookies.set("bhsdb","1")
-        var username = Cookies.get("username")
-        var password = Cookies.get("password")
         this.state = {settings:defaultsettings, loggingIn: false, loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading, get_gradebook:loading,get_school_info:loading, refresh: this.get_content.bind(this)}, page:""};
-        if (username != undefined && password != undefined) {
-            this.login(username,password)
-        }
+        
       }
     login(username,password) {
         // do login things
-        this.setState({"loggingIn": true})
-        verify(username,password).then((isValid) => {
-            if (isValid) {
-                this.setState({loggedIn: true, username, password, page:"dashboard"},this.get_content.bind(this))
-                Cookies.set("username",username, { expires: 7 })
-                Cookies.set("password", password, { expires: 7 })
-            } else {
-                alert("Invalid username or password") // who uses alerts in 2021?
-            }
-            this.setState({loggingIn: false})
-        })
+        this.setState({"loggingIn": true}, () => {
+            verify(username,password).then((isValid) => {
+                if (isValid) {
+                    this.setState({loggedIn: true, username, password, page:"dashboard"},this.get_content.bind(this))
+                    Cookies.set("username",username, { expires: 7 })
+                    Cookies.set("password", password, { expires: 7 })
+                } else {
+                    alert("Invalid username or password") // who uses alerts in 2021?
+                }
+                this.setState({loggingIn: false})
+            })
+        })   
     }
     logout() {
         this.setState({loggedIn: false, username:"", password:"", content: {}, page:""}) 
         Cookies.delete("username")
         Cookies.delete("password")
+        Cookies.delete("settings")
     }
     get_content() {
        /*this.setState({
@@ -97,6 +95,11 @@ export default class BHSDB extends React.Component {
         if (Cookies.get("settings") != undefined) {
             console.log("loading settings")
             this.setSettings(JSON.parse(Cookies.get("settings")))
+        }
+        var username = Cookies.get("username")
+        var password = Cookies.get("password")
+        if (username != undefined && password != undefined) {
+            this.login(username,password)
         }
     }
     componentWillUnmount() {
