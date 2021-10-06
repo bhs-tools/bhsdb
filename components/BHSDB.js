@@ -7,11 +7,13 @@ import { UserContext } from '../lib/contexts';
 import { Box } from '@mui/material';
 import PageNav from './pagenav';
 import NotFound from './pages/notfound';
+import SettingsPage from './pages/settings';
 const loading = {loading: true,error: false,data: {}}
+const defaultsettings = {testsetting: false, testsetting2: true}
 export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading, get_gradebook:loading,get_school_info:loading, refresh: this.get_content.bind(this)}, page:""};
+        this.state = {settings:defaultsettings, loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading, get_gradebook:loading,get_school_info:loading, refresh: this.get_content.bind(this)}, page:""};
       }
     login(username,password) {
         // do login things
@@ -66,6 +68,9 @@ export default class BHSDB extends React.Component {
     setpage(newpage) {
         this.setState({page:newpage})
     }
+    setSettings(x) {
+        this.setState({settings: x})
+    }
     render() {
         if (!this.state.loggedIn) {
             var page = <Login login={this.login.bind(this)}/>
@@ -73,6 +78,9 @@ export default class BHSDB extends React.Component {
             switch (this.state.page) {
                 case "dashboard":
                     var page = <Dashboard />
+                    break;
+                case "settings":
+                    var page = <SettingsPage setSettings={this.setSettings.bind(this)} defaultsettings={this.state.settings}/>
                     break;
                 default:
                     var page = <NotFound />
