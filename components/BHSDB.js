@@ -9,6 +9,7 @@ import { Box, CircularProgress, Backdrop } from '@mui/material';
 import PageNav from './pagenav';
 import NotFound from './pages/notfound';
 import SettingsPage from './pages/settings';
+import GradesPage from './pages/grades'
 const loading = {loading: true,error: false,data: {}}
 const defaultsettings = {testsetting: false, testsetting2: true}
 const Cookies = CookiesRaw.withAttributes({ secure: true, expires: 7 })
@@ -117,6 +118,9 @@ export default class BHSDB extends React.Component {
                 case "settings":
                     var page = <SettingsPage setSettings={this.setSettings.bind(this)} defaultsettings={this.state.settings}/>
                     break;
+                case "grades":
+                    var page = <GradesPage />
+                    break
                 default:
                     var page = <NotFound />
             }
