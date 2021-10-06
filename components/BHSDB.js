@@ -78,7 +78,7 @@ export default class BHSDB extends React.Component {
                 console.log("Refreshing...")
                 this.get_content()
             }
-        },5*60*1000) // 5 minutes
+        },1*60*1000) // 5 minutes
     }
     componentWillUnmount() {
         console.log("Stopping refresh")
