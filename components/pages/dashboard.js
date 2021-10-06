@@ -12,7 +12,7 @@ export default class Dashboard extends React.Component {
                 Hello <StudentName />!<br />
                 Periods:
                 <ol>
-                    <li><Period /></li>
+                    <li><Period period={1} /></li>
                     <li><Period period={2} /></li>
                     <li><Period period={3}/></li>
                     <li><Period period={4}/></li>
