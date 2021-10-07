@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Box, CardContent, Typography } from '@mui/material'
-export default class Gradebar extends React.Component {
+class GradeBar extends React.Component {
     render() {
         console.log("gamer")
         return (
@@ -21,3 +21,4 @@ export default class Gradebar extends React.Component {
         )
     }
 }
+export default GradeBar
