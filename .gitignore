@@ -4,6 +4,7 @@ dist
 dist-ssr
 *.local
 .next
+.env.local
 .pnp.*
 .yarn/*
 !.yarn/patches
