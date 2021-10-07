@@ -22,7 +22,7 @@ export default class Period extends React.Component {
     var perioddata = schedule.ClassLists.ClassListing[period-1]
     var gradedata = gradebook.Courses.Course[period-1]
     return (
-        <span>{ perioddata.CourseTitle } in room { perioddata.RoomName }</span>
+        <span>{ perioddata.CourseTitle } in room { perioddata.RoomName } with teacher { perioddata.Teacher }</span>
     )
     }
 }
