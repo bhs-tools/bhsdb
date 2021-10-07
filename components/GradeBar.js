@@ -16,7 +16,7 @@ export default class GradeBar extends React.Component {
         var marks = gradedata.Marks.Mark
         return (
             <React.Fragment>
-            <Card raised={true} sx={{ display: 'flex'}}>
+            <Card variant="outlined" raised={true} sx={{ display: 'flex'}}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', 'minWidth': '33%' }}>
                     <CardContent sx={{ flex: '1 0 auto', 'minWidth': "33%" }}>
                         <Typography component="div" variant="h5">
