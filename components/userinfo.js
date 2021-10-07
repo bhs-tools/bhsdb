@@ -1,5 +1,5 @@
 import React from 'react'
-import { get_student_info, } from '../lib/clientvue'
+import { get_student_info, is_refreshing } from '../lib/clientvue'
 import { Avatar, Typography, Skeleton, IconButton } from '@mui/material';
 import { UserContext } from '../lib/contexts';
 import LoopIcon from '@mui/icons-material/Loop'
@@ -18,7 +18,7 @@ export default class UserInfo extends React.Component {
                     <React.Fragment>
                         <Avatar alt="pfp" src={"data:image/png;base64,"+ student_info.Photo}/>
                         <Typography sx={{ marginLeft: "1em" }}>{ student_info.FormattedName }</Typography>
-                        <IconButton color="secondary" className={ this.context.refreshing != 0 ? "spin" : "" } aria-label="refresh" onClick={this.refresh.bind(this)}>
+                        <IconButton color="secondary" className={ is_refreshing(this.context) ? "spin" : "" } aria-label="refresh" onClick={this.refresh.bind(this)}>
                             <LoopIcon />
                         </IconButton>
                     </React.Fragment>
