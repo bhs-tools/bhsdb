@@ -77,6 +77,12 @@ export default class Messages extends React.Component {
             this.setState({ message: "" })
         }
     }
+    handleKeydown(evt) {
+        if (evt.code == "Enter") {
+            this.send_message()
+        }
+
+    }   
     render() {
         return (
             <Typography variant="body1">
@@ -104,7 +110,7 @@ export default class Messages extends React.Component {
                 </Paper>
                 </Grid>
                 <Grid item>
-                <TextField id="message" disabled={ !this.state.connected || this.state.connecting } autoComplete="off" sx = {{ width:"100vh" }} placeholder="Message" value={this.state.message} onChange={this.onChange.bind(this)} />
+                <TextField id="message" onKeyDown={this.handleKeydown.bind(this)} disabled={ !this.state.connected || this.state.connecting } autoComplete="off" sx = {{ width:"100vh" }} placeholder="Message" value={this.state.message} onChange={this.onChange.bind(this)} />
                 <Button variant="contained" onClick= {this.send_message.bind(this)} disabled={ !this.state.connected || this.state.connecting } >Send</Button>
                 </Grid> 
                 </Grid>
