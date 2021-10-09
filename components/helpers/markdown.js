@@ -19,7 +19,7 @@ const handler = {
             return <React.Fragment> { domToReact(node.children, handler) } </React.Fragment>
         }
         if (node.name === "a") {
-            return <Link href={node.attribs.href} underline="hover"> { domToReact(node.children, handler) } </Link>
+            return <Link target="_blank" rel="noopener" rel="noreferrer" href={node.attribs.href} underline="hover"> { domToReact(node.children, handler) } </Link>
         }
     }
 }
