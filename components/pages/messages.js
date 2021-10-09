@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, Backdrop, CircularProgress, Button, TextField, Paper, Grid } from '@mui/material';
+import Markdown from '../helpers/markdown';
 export default class Messages extends React.Component {
     constructor(props) {
         super(props);
@@ -44,7 +45,7 @@ export default class Messages extends React.Component {
         else if (data.startsWith("{")) {
             data = JSON.parse(data)
             if (data.type == "message") {
-                this.setState({ messages: [...this.state.messages, <Typography>{data.user}: {data.message}</Typography> ]})
+                this.setState({ messages: [...this.state.messages, <Typography>{data.user}: <Markdown>{data.message}</Markdown></Typography> ]})
             }
             else if (data.type == "join") {
                 this.setState({ messages: [...this.state.messages, <Typography color="red" fontStyle="italic">User {data.user} has joined</Typography>] })
