@@ -3,6 +3,7 @@ import Login from './pages/login'
 import Header from './Header'
 import Dashboard from './pages/dashboard'
 import CookiesRaw from 'js-cookie';
+import Messages from './pages/messages';
 import { verify, api_grabber } from '../lib/clientvue';
 import { UserContext } from '../lib/contexts';
 import { Box, CircularProgress, Backdrop } from '@mui/material';
@@ -120,6 +121,9 @@ export default class BHSDB extends React.Component {
                     break;
                 case "grades":
                     var page = <GradesPage />
+                    break
+                case "messages":
+                    var page = <Messages username={this.state.username} password={this.state.password}/>
                     break
                 default:
                     var page = <NotFound />

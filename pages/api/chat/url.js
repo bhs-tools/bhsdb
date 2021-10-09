@@ -1,3 +1,3 @@
 export default async function get_url(req, res) {
-    return process.env.CHAT_URL
+    res.status(200).send({ url: process.env.CHAT_URL })
 }
