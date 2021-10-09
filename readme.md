@@ -5,6 +5,7 @@ gamer
 to run the client:
 
 `yarn install` install deps
+
 `yarn dev` run site
 
 ### chat server
