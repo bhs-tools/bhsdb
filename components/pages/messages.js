@@ -96,9 +96,9 @@ export default class Messages extends React.Component {
                 </Grid> 
                 <Grid item>
                 <br />
-                <Paper elevation={5} sx = {{width:"100vh", height:"60vh"}}>
+                <Paper elevation={5} sx = {{width:"100vh", height:"60vh", "overflow":"auto", "display":"flex", "flex-direction": "column-reverse" }}>
                     <br />
-                    { this.state.messages.map((message,index) => { 
+                    { this.state.messages.slice(-50).reverse().map((message,index) => { 
                         return <Typography sx = {{"margin-left":"1em"}} key={index}>{message}</Typography>
                     })}
                 </Paper>
