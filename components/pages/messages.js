@@ -51,7 +51,7 @@ export default class Messages extends React.Component {
                         this.setState({ messages: [...this.state.messages, "User {} has joined.".replace("{}",data.user)] })
                     }
                     else if (data.type == "leave") {
-                        this.setState({ messages: [...this.state.messages, "User {} left joined.".replace("{}",data.user)] })
+                        this.setState({ messages: [...this.state.messages, "User {} left.".replace("{}",data.user)] })
                     }
                     else if (data.type == "list") {
                         this.setState({ messages: [...this.state.messages, "Currently connected users: " + data.people.join(",")] })
