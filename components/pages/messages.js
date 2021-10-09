@@ -12,6 +12,11 @@ export default class Messages extends React.Component {
             })
         })
     }
+    componentWillUnmount() {
+        if (this.state.connected) {
+            this.state.socket.close();
+        }
+    }
     button() {
         if (this.state.connected) {
             this.state.socket.close();
