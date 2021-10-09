@@ -44,16 +44,16 @@ export default class Messages extends React.Component {
         else if (data.startsWith("{")) {
             data = JSON.parse(data)
             if (data.type == "message") {
-                this.setState({ messages: [...this.state.messages, "USER: MESSAGE".replace("MESSAGE",data.message).replace("USER",data.user) ]})
+                this.setState({ messages: [...this.state.messages, <Typography>{data.user}: {data.message}</Typography> ]})
             }
             else if (data.type == "join") {
-                this.setState({ messages: [...this.state.messages, "User {} has joined.".replace("{}",data.user)] })
+                this.setState({ messages: [...this.state.messages, <Typography color="red" fontStyle="italic">User {data.user} has joined</Typography>] })
             }
             else if (data.type == "leave") {
-                this.setState({ messages: [...this.state.messages, "User {} left.".replace("{}",data.user)] })
+                this.setState({ messages: [...this.state.messages, <Typography color="red" fontStyle="italic">User {data.user} left</Typography>] })
             }
             else if (data.type == "list") {
-                this.setState({ messages: [...this.state.messages, "Currently connected users: " + data.people.join(", ")] })
+                this.setState({ messages: [...this.state.messages, <Typography color="gray" fontStyle="italic">Currently connected users: { data.people.join(", ") }</Typography>] })
             } 
             else if (data.type == "history") {
                 data.history.forEach(message => {
