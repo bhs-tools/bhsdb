@@ -21,42 +21,49 @@ export default class Messages extends React.Component {
             this.connect(this.state.room,this.state.name)
         }
     }
+    message(data, creds, name, room) {
+        console.log(data);
+        if (data == "CRED") {
+            this.state.socket.send(creds);
+        }
+        else if (data == "NAME") {
+            this.state.socket.send(name);
+        }
+        else if (data == "ROOM") {
+            this.state.socket.send(room);
+            this.setState({ connecting: false, ready: true });
+        } 
+        else if (data == "NAME_FAIL") {
+            alert("Name/Room name rejected.");
+        }
+        else if (data.startsWith("{")) {
+            data = JSON.parse(data)
+            if (data.type == "message") {
+                this.setState({ messages: [...this.state.messages, "USER: MESSAGE".replace("MESSAGE",data.message).replace("USER",data.user) ]})
+            }
+            else if (data.type == "join") {
+                this.setState({ messages: [...this.state.messages, "User {} has joined.".replace("{}",data.user)] })
+            }
+            else if (data.type == "leave") {
+                this.setState({ messages: [...this.state.messages, "User {} left.".replace("{}",data.user)] })
+            }
+            else if (data.type == "list") {
+                this.setState({ messages: [...this.state.messages, "Currently connected users: " + data.people.join(", ")] })
+            } 
+            else if (data.type == "history") {
+                data.history.forEach(message => {
+                    this.message(message, creds, name, room)
+                })
+            }
+        }
+    }
     connect(room,name) {
         var creds = this.props.username + "@" + this.props.password;
         var socket = new WebSocket(this.state.url);
         this.setState({ socket: socket, connecting: true }, () => {
             console.log("Connecting to " + this.state.url);
             socket.onmessage = (event) => {
-                var data = event.data
-                console.log(data);
-                if (data == "CRED") {
-                    socket.send(creds);
-                }
-                else if (data == "NAME") {
-                    socket.send(name);
-                }
-                else if (data == "ROOM") {
-                    socket.send(room);
-                    this.setState({ connecting: false, ready: true });
-                } 
-                else if (data == "NAME_FAIL") {
-                    alert("Name/Room name rejected.");
-                }
-                else if (data.startsWith("{")) {
-                    data = JSON.parse(data)
-                    if (data.type == "message") {
-                        this.setState({ messages: [...this.state.messages, "USER: MESSAGE".replace("MESSAGE",data.message).replace("USER",data.user) ]})
-                    }
-                    else if (data.type == "join") {
-                        this.setState({ messages: [...this.state.messages, "User {} has joined.".replace("{}",data.user)] })
-                    }
-                    else if (data.type == "leave") {
-                        this.setState({ messages: [...this.state.messages, "User {} left.".replace("{}",data.user)] })
-                    }
-                    else if (data.type == "list") {
-                        this.setState({ messages: [...this.state.messages, "Currently connected users: " + data.people.join(",")] })
-                    }
-                }
+                this.message(event.data, creds, name, room)
             }
             socket.onopen = (ev) => {
                 console.log("Connected to " + this.state.url);
