@@ -18,7 +18,7 @@ export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
         Cookies.set("bhsdb","1")
-        this.state = {settings:defaultsettings, loggingIn: false, loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading, get_gradebook:loading,get_school_info:loading, refresh: this.get_content.bind(this)}, page:""};
+        this.state = {settings:defaultsettings, loggingIn: false, loggedIn: false, username:"",password:"", content:{get_student_info: loading,get_schedule:loading, get_gradebook:loading,get_school_info:loading, refresh: this.get_content.bind(this), refreshing: 0}, page:""};
         
       }
     login(username,password) {
@@ -52,18 +52,22 @@ export default class BHSDB extends React.Component {
            }
        })*/
        // fetch all studentvue content here
-       console.log("in gamer get_content")
-       api_grabber("get_student_info",this.state.username,this.state.password).then((js) => {
-        this.update_content("get_student_info",js)
-        })
-        api_grabber("get_schedule",this.state.username,this.state.password).then((js) => {
-            this.update_content("get_schedule",js)
-        })
-        api_grabber("get_gradebook",this.state.username,this.state.password).then((js) => {
-            this.update_content("get_gradebook",js)
-        })
-        api_grabber("get_school_info",this.state.username,this.state.password).then((js) => {
-            this.update_content("get_school_info",js)
+       var oldobj = this.state.content
+       oldobj["refreshing"] = 4
+       this.setState({content: oldobj}, () => {
+            console.log("in gamer get_content")
+            api_grabber("get_student_info",this.state.username,this.state.password).then((js) => {
+                this.update_content("get_student_info",js)
+            })
+            api_grabber("get_schedule",this.state.username,this.state.password).then((js) => {
+                this.update_content("get_schedule",js)
+            })
+            api_grabber("get_gradebook",this.state.username,this.state.password).then((js) => {
+                this.update_content("get_gradebook",js)
+            })
+            api_grabber("get_school_info",this.state.username,this.state.password).then((js) => {
+                this.update_content("get_school_info",js)
+            })
         })
     }
     update_content(contenttype,content) {
@@ -77,6 +81,7 @@ export default class BHSDB extends React.Component {
             error: err,
             data: content.content
         }
+        oldobj["refreshing"] -= 1;
         this.setState({content:oldobj}) // todo: this is prob a bad idea
     }
     setpage(newpage) {
