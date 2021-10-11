@@ -4,6 +4,10 @@ client.on("error", function(error) {
     console.error(error);
   });
 export default async function token(req, res) {
+    if (process.env.ENABLE_CANVAS == "false" || process.env.ENABLE_CANVAS === undefined) {
+        res.status(200).send("CANVAS DISABLED")
+        return
+    }
     var code = req.query.code
     if ("error" in req.query) {
         // oh shit
