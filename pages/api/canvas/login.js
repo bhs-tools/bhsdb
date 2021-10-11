@@ -4,5 +4,10 @@ export default async function login(req, res) {
         res.status(200).send("CANVAS DISABLED")
         return
     }
+    // validate id
+    if (!Number.isFinite(req.query.id)) {
+        res.status(400).send("INVALID ID")
+        return
+    }
     return res.redirect(login_url.replace("{}",req.query.id))
 }
