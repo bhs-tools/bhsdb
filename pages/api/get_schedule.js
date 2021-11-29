@@ -17,8 +17,12 @@ export default async function get_schedule(req, res) {
         res.status(400).json(generateError("Missing Content","INVALID_REQUEST"))
         return;
     }
+    let term = 0
+    if ("term" in req.body) {
+    term = req.body.term
+    }
     StudentVue.login('https://wa-beth-psv.edupoint.com', req.body.username, req.body.password)
-        .then(client => client.getSchedule())
+        .then(client => client.getSchedule(term))
         .then((data) => {
             data = JSON.parse(data)
             if (data.hasOwnProperty("RT_ERROR")) {
