@@ -20,8 +20,10 @@
     "redis": "^3.1.2",
     "sanitize-html": "^2.5.1",
     "showdown": "^1.9.1",
+    "soap": "^0.43.0",
     "studentvue.js": "^0.1.1",
-    "swr": "^1.0.1"
+    "swr": "^1.0.1",
+    "xml2json": "^0.12.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",

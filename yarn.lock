@@ -902,6 +902,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios-ntlm@npm:^1.2.0":
+  version: 1.2.1
+  resolution: "axios-ntlm@npm:1.2.1"
+  dependencies:
+    axios: ^0.21.3
+  checksum: ed03e3c3e18bd64c594cdb1e5579b68486d183bb2035b4aa4da70e895b9acda37caceff9d5622b15d968171a2a37a700d38682583cd838661d7a75e3064b32d4
+  languageName: node
+  linkType: hard
+
+"axios@npm:^0.21.1, axios@npm:^0.21.3":
+  version: 0.21.4
+  resolution: "axios@npm:0.21.4"
+  dependencies:
+    follow-redirects: ^1.14.0
+  checksum: 44245f24ac971e7458f3120c92f9d66d1fc695e8b97019139de5b0cc65d9b8104647db01e5f46917728edfc0cfd88eb30fc4c55e6053eef4ace76768ce95ff3c
+  languageName: node
+  linkType: hard
+
 "babel-plugin-macros@npm:^2.6.1":
   version: 2.8.0
   resolution: "babel-plugin-macros@npm:2.8.0"
@@ -1413,6 +1431,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"content-type-parser@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "content-type-parser@npm:1.0.2"
+  checksum: a9afe2c02059b2b44257f073856c5a44b178fcb67b8a4d1b03046711ff7bb13bfa0c7629e70905c226faf8c0b0e13ade824717a4c974c7c6cdb0ae13774752df
+  languageName: node
+  linkType: hard
+
 "convert-source-map@npm:1.7.0":
   version: 1.7.0
   resolution: "convert-source-map@npm:1.7.0"
@@ -1597,6 +1622,18 @@ __metadata:
     supports-color:
       optional: true
   checksum: 820ea160e267e23c953c9ed87e7ad93494d8cda2f7349af5e7e3bb236d23707ee3022f477d5a7d2ee86ef2bf7d60aa9ab22d1f58080d7deb9dccd073585e1e43
+  languageName: node
+  linkType: hard
+
+"debug@npm:^4.3.2":
+  version: 4.3.3
+  resolution: "debug@npm:4.3.3"
+  dependencies:
+    ms: 2.1.2
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: 14472d56fe4a94dbcfaa6dbed2dd3849f1d72ba78104a1a328047bb564643ca49df0224c3a17fa63533fd11dd3d4c8636cd861191232a2c6735af00cc2d4de16
   languageName: node
   linkType: hard
 
@@ -2034,6 +2071,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"follow-redirects@npm:^1.14.0":
+  version: 1.14.5
+  resolution: "follow-redirects@npm:1.14.5"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: f004a76b2ee3a849772c2816e30928253bf47537b0f00184d89f4966413add96a228a4d96ca8c702bc045a683c52c2ba41545c915cc1a5e33bf8fd9d07b59aee
+  languageName: node
+  linkType: hard
+
 "foreach@npm:^2.0.5":
   version: 2.0.5
   resolution: "foreach@npm:2.0.5"
@@ -2067,6 +2114,13 @@ __metadata:
     combined-stream: ^1.0.6
     mime-types: ^2.1.12
   checksum: 10c1780fa13dbe1ff3100114c2ce1f9307f8be10b14bf16e103815356ff567b6be39d70fc4a40f8990b9660012dc24b0f5e1dde1b6426166eb23a445ba068ca3
+  languageName: node
+  linkType: hard
+
+"formidable@npm:^1.2.2":
+  version: 1.2.6
+  resolution: "formidable@npm:1.2.6"
+  checksum: 2b68ed07ba88302b9c63f8eda94f19a460cef6017bfda48348f09f41d2a36660c9353137991618e0e4c3db115b41e4b8f6fa63bc973b7a7c91dec66acdd02a56
   languageName: node
   linkType: hard
 
@@ -2165,6 +2219,13 @@ fsevents@~2.3.1:
   dependencies:
     stream-parser: ^0.3.1
   checksum: 4b6b9ca03b74a3aeebc56a78898fe1598a188d5026ce77fae7c41b49bccc9993b0e15d694fbe9eda4735c0e1cf2fae119f819faacba64c1b68254f47b3d04612
+  languageName: node
+  linkType: hard
+
+"get-stream@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "get-stream@npm:6.0.1"
+  checksum: e04ecece32c92eebf5b8c940f51468cd53554dcbb0ea725b2748be583c9523d00128137966afce410b9b051eb2ef16d657cd2b120ca8edafcf5a65e81af63cad
   languageName: node
   linkType: hard
 
@@ -3006,7 +3067,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.15":
+"lodash@npm:^4.17.15, lodash@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -4264,8 +4325,10 @@ resolve@^1.12.0:
     redis: ^3.1.2
     sanitize-html: ^2.5.1
     showdown: ^1.9.1
+    soap: ^0.43.0
     studentvue.js: ^0.1.1
     swr: ^1.0.1
+    xml2json: ^0.12.0
   languageName: unknown
   linkType: soft
 
@@ -4468,6 +4531,25 @@ resolve@^1.12.0:
     uuid: ^3.1.0
     xml-crypto: ^1.4.0
   checksum: 22fd254ea359f5983b5ac33ae5cb094e9aa06da61975e67b1119733f9de88fd48cbf1f32a851d9085ef54c3d404e7e7a49f1d490fb8afcbfb60cb911a84298ce
+  languageName: node
+  linkType: hard
+
+"soap@npm:^0.43.0":
+  version: 0.43.0
+  resolution: "soap@npm:0.43.0"
+  dependencies:
+    axios: ^0.21.1
+    axios-ntlm: ^1.2.0
+    content-type-parser: ^1.0.2
+    debug: ^4.3.2
+    formidable: ^1.2.2
+    get-stream: ^6.0.1
+    lodash: ^4.17.21
+    sax: ">=0.6"
+    strip-bom: ^3.0.0
+    uuid: ^8.3.2
+    xml-crypto: ^2.1.3
+  checksum: 6f122af8f649a8c2605a9f684f80c2500656882527b9e8b4517b1c48b23120e92bb61350df2a9f3aea9ca84786335945bc6840369bd204391d4581d009bd6d30
   languageName: node
   linkType: hard
 
@@ -5116,6 +5198,15 @@ resolve@^1.12.0:
   languageName: node
   linkType: hard
 
+"uuid@npm:^8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
+  languageName: node
+  linkType: hard
+
 "vary@npm:^1":
   version: 1.1.2
   resolution: "vary@npm:1.1.2"
@@ -5248,6 +5339,16 @@ resolve@^1.12.0:
     "@xmldom/xmldom": ^0.7.0
     xpath: 0.0.32
   checksum: cc08fd8b581f567fbf424ac83823505719e07e4860f8e41030a2ed5610de73f9d463a619541f0a9f90f11493e6e12ddaecfb1947e5f111708991fd721dc713a9
+  languageName: node
+  linkType: hard
+
+"xml-crypto@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "xml-crypto@npm:2.1.3"
+  dependencies:
+    "@xmldom/xmldom": ^0.7.0
+    xpath: 0.0.32
+  checksum: 04273568b4ed3d1422b7e93ae7c5e8e14180e9d377038a5767ef6af4d1da2ec766f3a476f4cf0140ecedb93036dac63e563f60d9bb249c5a344d77c93c07ff87
   languageName: node
   linkType: hard
 
