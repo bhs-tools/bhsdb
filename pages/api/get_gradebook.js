@@ -17,15 +17,13 @@ export default async function get_grades(req, res) {
         res.status(400).json(generateError("Missing Content","INVALID_REQUEST"))
         return;
     }
-    StudentVue.login('https://wa-beth-psv.edupoint.com', req.body.username, req.body.password)
-        .then(client => client.getGradebook())
-        .then((data) => {
-            data = JSON.parse(data)
-            if (data.hasOwnProperty("RT_ERROR")) {
-                res.status(200).json(generateError(data.RT_ERROR.ERROR_MESSAGE,"STUDENTVUE_ERROR"))
-                return
-            }
-            res.status(200).json(generateResp(data["Gradebook"]))
-            return
-        });
+    let client = await StudentVue.login('https://wa-beth-psv.edupoint.com', req.body.username, req.body.password)
+    let data = await client.getGradebook()
+    data = JSON.parse(data)
+    if (data.hasOwnProperty("RT_ERROR")) {
+        res.status(200).json(generateError(data.RT_ERROR.ERROR_MESSAGE,"STUDENTVUE_ERROR"))
+        return
+    }
+    res.status(200).json(generateResp(data["Gradebook"]))
+    return
 }

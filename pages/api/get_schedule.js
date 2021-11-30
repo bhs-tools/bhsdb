@@ -19,17 +19,15 @@ export default async function get_schedule(req, res) {
     }
     let term = 0
     if ("term" in req.body) {
-    term = req.body.term
+        term = req.body.term
     }
-    StudentVue.login('https://wa-beth-psv.edupoint.com', req.body.username, req.body.password)
-        .then(client => client.getSchedule(term))
-        .then((data) => {
-            data = JSON.parse(data)
-            if (data.hasOwnProperty("RT_ERROR")) {
-                res.status(200).json(generateError(data.RT_ERROR.ERROR_MESSAGE,"STUDENTVUE_ERROR"))
-                return
-            }
-            res.status(200).json(generateResp(data["StudentClassSchedule"]))
-            return
-        });
+    let client = await StudentVue.login('https://wa-beth-psv.edupoint.com', req.body.username, req.body.password)
+    let data = await client.getSchedule(term)
+    data = JSON.parse(data)
+    if (data.hasOwnProperty("RT_ERROR")) {
+        res.status(200).json(generateError(data.RT_ERROR.ERROR_MESSAGE,"STUDENTVUE_ERROR"))
+        return
+    }
+    res.status(200).json(generateResp(data["StudentClassSchedule"]))
+    return
 }
