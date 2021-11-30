@@ -1,4 +1,4 @@
-const StudentVue = require("studentvue.js")
+import { get_student_info as servervue_get_student_info } from '../../lib/servervue'
 import Cors from 'cors'
 import { runMiddleware, generateError, generateResp } from '../../lib/util'
 // Initializing the cors middleware
@@ -18,12 +18,16 @@ export default async function validate(req, res) {
         res.status(400).json(generateError("Missing Content", "INVALID_REQUEST"))
         return;
     }
-    let client = await StudentVue.login('https://wa-beth-psv.edupoint.com', req.body.username, req.body.password)
-    let data = client.getStudentInfo()
-    data = JSON.parse(data)
-    if (data.hasOwnProperty("RT_ERROR")) {
-        res.status(200).json(generateError(data.RT_ERROR.ERROR_MESSAGE, "STUDENTVUE_ERROR"))
-        return
+    try {
+        let _ = await servervue_get_student_info(req.body.username, req.body.password) // theres gotta be a better way to check creds
+    } catch (e) {
+        if (e.code == "STUDENTVUE") {
+            res.status(200).json(generateError(e.message,"STUDENTVUE_ERROR"))
+            return
+        }
+        else {
+            throw e;
+        }
     }
     res.status(200).json(generateResp({}))
     return

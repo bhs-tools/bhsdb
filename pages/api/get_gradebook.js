@@ -1,4 +1,4 @@
-const StudentVue = require("studentvue.js")
+import { get_gradebook as servervue_get_gradebook } from '../../lib/servervue'
 import Cors from 'cors'
 import { runMiddleware,  generateError, generateResp } from '../../lib/util'
 // Initializing the cors middleware
@@ -17,12 +17,21 @@ export default async function get_grades(req, res) {
         res.status(400).json(generateError("Missing Content","INVALID_REQUEST"))
         return;
     }
-    let client = await StudentVue.login('https://wa-beth-psv.edupoint.com', req.body.username, req.body.password)
-    let data = await client.getGradebook()
-    data = JSON.parse(data)
-    if (data.hasOwnProperty("RT_ERROR")) {
-        res.status(200).json(generateError(data.RT_ERROR.ERROR_MESSAGE,"STUDENTVUE_ERROR"))
-        return
+    let term = undefined
+    if ("term" in req.body) {
+        term = req.body.term
+    }
+    let data = {}
+    try {
+        data = await servervue_get_gradebook(req.body.username, req.body.password, term)
+    } catch (e) {
+        if (e.code == "STUDENTVUE") {
+            res.status(200).json(generateError(e.message,"STUDENTVUE_ERROR"))
+            return
+        }
+        else {
+            throw e;
+        }
     }
     res.status(200).json(generateResp(data["Gradebook"]))
     return
