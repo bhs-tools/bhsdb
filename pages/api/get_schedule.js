@@ -1,4 +1,4 @@
-const StudentVue = require("studentvue.js")
+const StudentVue = require("./svue.js")
 import Cors from 'cors'
 import { runMiddleware,  generateError, generateResp } from '../../lib/util'
 // Initializing the cors middleware
