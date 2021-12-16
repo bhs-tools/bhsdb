@@ -3,17 +3,26 @@ import Login from './pages/login'
 import Header from './Header'
 import Dashboard from './pages/dashboard'
 import CookiesRaw from 'js-cookie';
-import Messages from './pages/messages';
+
 import { verify, api_grabber } from '../lib/clientvue';
 import { UserContext } from '../lib/contexts';
 import { Box, CircularProgress, Backdrop } from '@mui/material';
 import PageNav from './pagenav';
-import NotFound from './pages/notfound';
-import SettingsPage from './pages/settings';
-import GradesPage from './pages/grades'
+
 const loading = {loading: true,error: false,data: {}}
 const defaultsettings = {testsetting: false, testsetting2: true}
 const Cookies = CookiesRaw.withAttributes({ secure: true, expires: 7 })
+import dynamic from 'next/dynamic'
+
+//import SettingsPage from './pages/settings';
+const SettingsPage = dynamic(() => import('./pages/settings'), {loading: () => <CircularProgress color="inherit" />})
+//import GradesPage from './pages/grades'
+const GradesPage = dynamic(() => import('./pages/grades'), {loading: () => <CircularProgress color="inherit" />})
+//import Messages from './pages/messages';
+const Messages = dynamic(() => import('./pages/messages'), {loading: () => <CircularProgress color="inherit" />})
+//import NotFound from './pages/notfound';
+const NotFound = dynamic(() => import('./pages/notfound'), {loading: () => <CircularProgress color="inherit" />})
+
 export default class BHSDB extends React.Component {
     constructor(props) {
         super(props);
